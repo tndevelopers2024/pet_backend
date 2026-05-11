@@ -34,15 +34,7 @@ async function remove(req, res) {
 }
 
 async function uploadImage(req, res) {
-  try {
-    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-    const imageUrl = `/uploads/pets/${req.file.filename}`;
-    const pet = await petsService.updatePetImage(req.params.id, req.user.id, imageUrl);
-    if (!pet) return res.status(404).json({ error: 'Pet not found' });
-    res.json(pet);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  res.status(501).json({ error: 'Image upload not yet supported' });
 }
 
 module.exports = { create, list, update, remove, uploadImage };
