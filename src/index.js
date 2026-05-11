@@ -6,7 +6,8 @@ const path = require('path');
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000').split(',').map(o => o.trim());
+app.use(cors({ origin: (origin, cb) => cb(null, !origin || allowedOrigins.includes(origin)), credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
