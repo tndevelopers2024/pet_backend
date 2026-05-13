@@ -10,5 +10,8 @@ router.get('/boarding/:id', ctrl.boardingDetail);
 router.put('/boarding/:id/status', ctrl.updateBoardingStatus);
 router.get('/grooming/:id', ctrl.groomingDetail);
 router.put('/grooming/:id/status', ctrl.updateGroomingStatus);
+router.get('/training', ctrl.trainingBookings);
+router.post('/training', ctrl.createTrainingBooking);
+router.put('/training/:id/status', ctrl.updateTrainingStatus);
 
 module.exports = router;

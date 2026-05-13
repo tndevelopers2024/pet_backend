@@ -17,6 +17,8 @@ app.use('/api/packages', require('./modules/packages/packages.routes'));
 app.use('/api/slots', require('./modules/slots/slots.routes'));
 app.use('/api/admin', require('./modules/admin/admin.routes'));
 app.use('/api/notifications', require('./modules/notifications/notifications.routes'));
+app.use('/api/onboarding', require('./modules/onboarding/onboarding.routes'));
+app.use('/api/training', require('./modules/training/training.routes'));
 
 app.use((err, req, res, next) => {
   const status = err.status || err.statusCode || 500;

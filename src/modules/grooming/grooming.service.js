@@ -36,7 +36,10 @@ async function cancelBooking(bookingId, userId) {
   if (!booking) throw { status: 404, message: 'Booking not found' };
 
   await GroomingBooking.findByIdAndUpdate(bookingId, { status: 'cancelled' });
-  await TimeSlot.findByIdAndUpdate(booking.slot_id, { $inc: { booked_count: -1 } });
+
+  if (booking.slot_id) {
+    await TimeSlot.findByIdAndUpdate(booking.slot_id, { $inc: { booked_count: -1 } });
+  }
 
   if (booking.payment_mode === 'package' && booking.package_id) {
     await packagesService.returnCredit(booking.package_id);

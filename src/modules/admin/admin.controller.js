@@ -63,4 +63,31 @@ async function updateGroomingStatus(req, res) {
   }
 }
 
-module.exports = { dashboard, users, userDetail, boardingDetail, groomingDetail, updateBoardingStatus, updateGroomingStatus };
+async function createTrainingBooking(req, res) {
+  try {
+    const data = await adminService.createTrainingBooking(req.body);
+    res.status(201).json(data);
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
+}
+
+async function trainingBookings(req, res) {
+  try {
+    const data = await adminService.getTrainingBookings();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+async function updateTrainingStatus(req, res) {
+  try {
+    const data = await adminService.updateTrainingStatus(req.params.id, req.body.status);
+    res.json(data);
+  } catch (err) {
+    res.status(err.status || 500).json({ error: err.message });
+  }
+}
+
+module.exports = { dashboard, users, userDetail, boardingDetail, groomingDetail, updateBoardingStatus, updateGroomingStatus, trainingBookings, createTrainingBooking, updateTrainingStatus };
