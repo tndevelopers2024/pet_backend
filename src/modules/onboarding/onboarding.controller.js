@@ -14,7 +14,8 @@ async function submit(req, res) {
 async function uploadIdentityProof(req, res) {
   try {
     if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-    const url = req.file.path || `/uploads/${req.file.filename}`;
+    // File is in req.file.buffer — wire up cloud storage (Cloudinary/S3) to persist it
+    const url = req.file.originalname;
     const user = await User.findByIdAndUpdate(
       req.user.id,
       { identity_proof_url: url },
